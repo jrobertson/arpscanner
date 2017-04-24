@@ -24,4 +24,3 @@ Output (extract):
 * arpscanner https://rubygems.org/gems/arpscanner
 
 arp scanner ip scan arpscanner
-# arpscanner
