@@ -1,6 +1,11 @@
 # Introducing the ARP scanner gem
 
-Usage:
+## Prerequisites
+
+`sudo apt-get install arp-scan`
+
+
+## Usage
 
     require 'arpscanner'
 
