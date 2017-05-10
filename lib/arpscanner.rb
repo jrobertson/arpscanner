@@ -2,6 +2,7 @@
 
 # file: arpscanner.rb
 
+require 'dynarex'
 
 class ArpScanner
   
@@ -22,20 +23,24 @@ class ArpScanner
   def scan()
     
     a = `#{@arpscan_cmd}`.lines
-    a.shift 2
-    a2 = a.map {|x| %i(ip mac mfr).zip(x.chomp.split("\t")).to_h}
+
+    a2 = a[2..-3].map {|x| %i(ip mac mfr).zip(x.chomp.split("\t")).to_h}
     
     # Add additional vendors
     h = {/^b8:27:eb:/ => 'Raspberry Pi Foundation'}
     
-    a2.map do |x|
+    a2.map! do |x|
       
       _, vendor = h.detect {|mac, mfr| x[:mac] =~ mac }
       x[:mfr] = vendor if vendor
       x
 
     end
+    
+    @dx = Dynarex.new
+    @dx.import a2    
 
   end
+
   
 end
