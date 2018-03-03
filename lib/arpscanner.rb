@@ -5,8 +5,11 @@
 require 'dynarex'
 
 class ArpScanner
-  
-  def initialize()
+
+  # options:
+  # nic: e.g.  eth0, enp2s0f0
+  #
+  def initialize(nic: 'eth0')
     
     package = 'arp-scan'
     
@@ -16,7 +19,7 @@ class ArpScanner
       raise 'ArpScanner: arp-scanner package not found'
     end
     
-    @arpscan_cmd = "sudo #{package} --interface=eth0 --localnet"
+    @arpscan_cmd = "sudo #{package} --interface=#{nic} --localnet"
     
   end
   
