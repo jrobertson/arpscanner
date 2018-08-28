@@ -9,9 +9,10 @@ class ArpScanner
   # options:
   # nic: e.g.  eth0, enp2s0f0
   #
-  def initialize(nic: 'eth0')
+  def initialize(nic: 'eth0', vendors: {})
     
     package = 'arp-scan'
+    @vendors = vendors
     
     found = `dpkg --get-selections | grep #{package}`
     
@@ -30,7 +31,7 @@ class ArpScanner
     a2 = a[2..-3].map {|x| %i(ip mac mfr).zip(x.chomp.split("\t")).to_h}
     
     # Add additional vendors
-    h = {/^b8:27:eb:/ => 'Raspberry Pi Foundation'}
+    h = {/^b8:27:eb:/ => 'Raspberry Pi Foundation'}.merge(@vendors)
     
     a2.map! do |x|
       
