@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'arpscanner'
-  s.version = '0.2.0'
+  s.version = '0.2.1'
   s.summary = 'A wrapper for the package arp-scan. It can detect if a ' + 
       'found MAC address belongs to a Raspberry Pi.'
   s.authors = ['James Robertson']

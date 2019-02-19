@@ -5,11 +5,12 @@
 require 'dynarex'
 
 class ArpScanner
+  using ColouredText
 
   # options:
   # nic: e.g.  eth0, enp2s0f0
   #
-  def initialize(nic: 'eth0', vendors: {})
+  def initialize(nic: `ip addr`[/(?<=global )\w+/], vendors: {})
     
     package = 'arp-scan'
     @vendors = vendors
@@ -17,7 +18,7 @@ class ArpScanner
     found = `dpkg --get-selections | grep #{package}`
     
     if found.empty? then
-      raise 'ArpScanner: arp-scanner package not found'
+      raise 'ArpScanner: arp-scan package not found'.error
     end
     
     @arpscan_cmd = "sudo #{package} --interface=#{nic} --localnet"
