@@ -59,7 +59,7 @@ class ArpScanner
         h[:mfr] = vendor if vendor
       end
       
-      h
+      h 
       
     end
     
@@ -72,9 +72,10 @@ class ArpScanner
       x[:mfr] = vendor if vendor
       x
 
-    end
-    
-    Dynarex.new.import a2
+    end    
+        
+    # sort by IP address
+    Dynarex.new.import a2.sort_by {|x| x[:ip][/\d+$/].to_i}
 
   end
 
